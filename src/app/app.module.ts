@@ -19,8 +19,8 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
 
 const routes: Routes = [
   // basic routes
-  { path: '', component: TodoListComponent, pathMatch: 'full' },
-  { path: ':filter', component: TodoListComponent }
+  { path: '', component: FooterComponent, pathMatch: 'full' },
+  { path: ':filter', component: FooterComponent }
 ];
 
 @NgModule({

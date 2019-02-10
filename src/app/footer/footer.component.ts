@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
 import { AppState } from './../../redux/app.reducer';
 import * as FilterActions from './../../redux/filter/filter.actions';
@@ -10,20 +11,19 @@ import { getStateCompleted } from './../../redux/todo/todo.selectors';
   selector: 'app-footer',
   templateUrl: './footer.component.html'
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
   countTodos: number;
-  currentFilter: string;
+  currentFilter: FilterActions.Filter;
   showFooter: boolean;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private route: ActivatedRoute
   ) {
     this.readFilterState();
     this.readTodosState();
-  }
-
-  ngOnInit() {
+    this.readParams();
   }
 
   clearCompleted() {
@@ -46,9 +46,15 @@ export class FooterComponent implements OnInit {
 
   private readFilterState() {
     this.store.select('filter')
-    .subscribe(fitler => {
-      this.currentFilter = fitler;
+    .subscribe(filter => {
+      this.currentFilter = filter;
     });
   }
 
+  private readParams() {
+    this.route.params
+    .subscribe(params => {
+      this.store.dispatch(new FilterActions.SetFilterAction(FilterActions.toFilter(params.filter)));
+    });
+  }
 }

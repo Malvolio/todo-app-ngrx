@@ -1,11 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AppState } from './../../redux/app.reducer';
 import { Todo } from './../../redux/todo/todo.model';
-import * as FilterActions from './../../redux/filter/filter.actions';
 import * as TodoActions from './../../redux/todo/todo.actions';
 import { getVisibleTodos, getStateCompleted } from './../../redux/todo/todo.selectors';
 
@@ -13,30 +11,21 @@ import { getVisibleTodos, getStateCompleted } from './../../redux/todo/todo.sele
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html'
 })
-export class TodoListComponent implements OnInit {
+export class TodoListComponent {
 
   todos: Todo[] = [];
   checkField: FormControl;
 
   constructor(
     private store: Store<AppState>,
-    private route: ActivatedRoute
   ) {
     this.checkField = new FormControl();
-    this.readParams();
     this.readStateCompleted();
     this.readTodosState();
   }
 
-  ngOnInit() {
-  }
-
   toggleAll() {
     this.store.dispatch(new TodoActions.CompletedAllAction());
-  }
-
-  private setFilter(filter: string) {
-    this.store.dispatch(new FilterActions.SetFilterAction(FilterActions.toFilter(filter)));
   }
 
   private readTodosState() {
@@ -50,13 +39,6 @@ export class TodoListComponent implements OnInit {
     this.store.select(getStateCompleted)
     .subscribe(status => {
       this.checkField.setValue(status);
-    });
-  }
-
-  private readParams() {
-    this.route.params
-    .subscribe(params => {
-      this.setFilter(params.filter);
     });
   }
 }
