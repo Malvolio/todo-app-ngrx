@@ -4,21 +4,21 @@
     <li>
       <a 
         [routerLink]="['/']" 
-        [class.selected]="currentFilter == 'SHOW_ALL'">
+        [class.selected]="currentFilter == 'all'">
         All
       </a>
     </li>
     <li>
       <a 
         [routerLink]="['/','active']"
-        [class.selected]="currentFilter == 'SHOW_ACTIVE'">
+        [class.selected]="currentFilter == 'active'">
         Active
       </a>
     </li>
     <li>
       <a 
         [routerLink]="['/','completed']"
-        [class.selected]="currentFilter == 'SHOW_COMPLETED'">
+        [class.selected]="currentFilter == 'completed'">
         Completed
       </a>
     </li>

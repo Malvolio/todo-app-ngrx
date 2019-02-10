@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from './../app.reducer';
 import { Todo } from './todo.model';
+import { Filter } from './../filter/filter.actions';
 
 export const getState  = (state: AppState) => state;
 export const getFilter = (state: AppState) => state.filter;
@@ -9,14 +10,13 @@ export const getTodos  = (state: AppState) => state.todos;
 export const getVisibleTodos = createSelector(
   getTodos,
   getFilter,
-  (todos: Todo[], filter: string) => {
+  (todos: Todo[], filter: Filter) => {
     switch (filter) {
-      default:
-      case 'SHOW_ALL':
+      case 'all':
         return todos;
-      case 'SHOW_COMPLETED':
+      case 'completed':
         return todos.filter(t => t.completed);
-      case 'SHOW_ACTIVE':
+      case 'active':
         return todos.filter(t => !t.completed);
     }
   }

@@ -36,20 +36,7 @@ export class TodoListComponent implements OnInit {
   }
 
   private setFilter(filter: string) {
-    switch (filter) {
-      case 'active': {
-        this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ACTIVE'));
-        break;
-      }
-      case 'completed': {
-        this.store.dispatch(new FilterActions.SetFilterAction('SHOW_COMPLETED'));
-        break;
-      }
-      default: {
-        this.store.dispatch(new FilterActions.SetFilterAction('SHOW_ALL'));
-        break;
-      }
-    }
+    this.store.dispatch(new FilterActions.SetFilterAction(FilterActions.toFilter(filter)));
   }
 
   private readTodosState() {
