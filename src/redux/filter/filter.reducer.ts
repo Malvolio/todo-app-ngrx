@@ -1,6 +1,6 @@
 import * as FilterActions from './filter.actions';
 
-export function FilterReducer(state: string = 'SHOW_ALL', action: FilterActions.SetFilterAction) {
+export function FilterReducer(state: FilterActions.Filter = 'all', action: FilterActions.SetFilterAction) {
   if (!action) {
     return state;
   }
