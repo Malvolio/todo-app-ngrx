@@ -4,6 +4,13 @@ Is the example for use Angular + Ngrx (Redux) for a [TodoMV* App](http://todomvc
 
 You can see all files about redux in [TodoMV* App](https://github.com/nicobytes/todo-app-ngrx/tree/master/src/redux)
 
+This (Malvolio/todo-app-ngrx) is a slightly alterted version.  The
+[master branch](https://github.com/Malvolio/todo-app-ngrx/tree/master/src)
+is just simplifications of the code.  The
+[rxjs-experiment branch](https://github.com/Malvolio/todo-app-ngrx/tree/rxjs-experiment/src) 
+works with an
+[experimental version of Angular](https://github.com/Malvolio/angular/tree/master/src).
+
 Built with [@angular/cli](https://github.com/angular/angular-cli)
 
 # [DEMO ONLINE](https://todomvc-8d040.firebaseapp.com/)
