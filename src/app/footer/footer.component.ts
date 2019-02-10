@@ -57,4 +57,21 @@ export class FooterComponent {
       this.store.dispatch(new FilterActions.SetFilterAction(FilterActions.toFilter(params.filter)));
     });
   }
+
+  readonly footerLinks = [
+    {
+      filter: 'all',
+      label:  'All',
+    },
+    {
+      filter: 'active',
+      label:  'Active',
+    },
+    {
+      filter: 'completed',
+      label:  'Completed',
+    },
+  ];
 }
+
+

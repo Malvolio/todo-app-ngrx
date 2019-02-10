@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { FooterComponent } from './footer/footer.component';
+import { FooterLinkComponent } from './footer/footer-link.component';
 import { NewTodoComponent } from './new-todo/new-todo.component';
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
     TodoComponent,
     TodoListComponent,
     FooterComponent,
+    FooterLinkComponent,
     NewTodoComponent
   ],
   imports: [
