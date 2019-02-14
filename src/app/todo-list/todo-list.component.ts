@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs';
 
 import { AppState } from './../../redux/app.reducer';
 import { Todo } from './../../redux/todo/todo.model';
@@ -9,36 +11,20 @@ import { getVisibleTodos, getStateCompleted } from './../../redux/todo/todo.sele
 
 @Component({
   selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html'
+  templateUrl: './todo-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListComponent {
-
-  todos: Todo[] = [];
-  checkField: FormControl;
-
+  readonly complete = this.store.select(getStateCompleted);
+  readonly todoList = this.store.select(getVisibleTodos);
+  readonly toggleAll = new Subject<unknown>();
+    
   constructor(
-    private store: Store<AppState>,
+    private readonly store: Store<AppState>,
+    private readonly route: ActivatedRoute
   ) {
-    this.checkField = new FormControl();
-    this.readStateCompleted();
-    this.readTodosState();
-  }
-
-  toggleAll() {
-    this.store.dispatch(new TodoActions.CompletedAllAction());
-  }
-
-  private readTodosState() {
-    this.store.select(getVisibleTodos)
-    .subscribe(todos => {
-      this.todos = todos;
-    });
-  }
-
-  private readStateCompleted() {
-    this.store.select(getStateCompleted)
-    .subscribe(status => {
-      this.checkField.setValue(status);
+    this.toggleAll.subscribe(() => {
+      this.store.dispatch(new TodoActions.CompletedAllAction());
     });
   }
 }
